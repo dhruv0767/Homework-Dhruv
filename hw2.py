@@ -49,7 +49,7 @@ def run():
     def generate_summary_openai(content, summary_type, language, advanced):
         import openai
         openai.api_key = st.secrets["openai_api_key"]
-        model = "gpt-3.5-turbo" if advanced else "gpt-3.5-turbo"
+        model = "gpt-3.5-turbo" if advanced else "gpt-4"
         prompt = f"Please provide a {summary_type.lower()} of the following content in {language}:\n\n{content}"
         try:
             response = openai.ChatCompletion.create(
