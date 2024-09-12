@@ -8,19 +8,19 @@ st.title('HOMEWORK MANAGER')
 
 # Sidebar selection
 st.sidebar.title("Navigation")
-selection = st.sidebar.radio("Go to", ["Home", "Lab 1", "Lab 2", "Lab 3"])
+selection = st.sidebar.radio("Go to", ["Home", "Homework 1", "Homework 2"])
 
 # Home Page
 if selection == "Home":
     st.write("""
-    ## Welcome to the Dhruv's Streamlit Labs App
-    Use the sidebar to navigate to different labs.
+    ## Welcome to the Dhruv's Streamlit Homework App
+    Use the sidebar to navigate to different Homework.
     """)
 
-# Lab 1 Page
-elif selection == "Lab 1":
+# HW 1 Page
+elif selection == "Homework 1":
     hw1.run()
 
-# Lab 2 Page
-elif selection == "Lab 2":
+# HW 2 Page
+elif selection == "Homework 2":
     hw2.run()

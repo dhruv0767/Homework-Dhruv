@@ -29,11 +29,23 @@ def run():
             response = requests.get(url)
             response.raise_for_status()
             soup = BeautifulSoup(response.content, 'html.parser')
-            return soup.get_text()
+
+            # Extract the main content, focusing on elements with the most relevant content
+            content_div = soup.find('article')  # Common for blogs and news sites
+            if not content_div:
+                content_div = soup.find(id="bodyContent")  # Wikipedia-specific ID
+            if not content_div:
+                content_div = soup.find('main')  # General 'main' tag for main content
+            if not content_div:
+                return "Could not extract the main content of the page."
+
+            return content_div.get_text(separator=' ', strip=True)
+        
         except requests.RequestException as e:
             st.error(f"Error reading {url}: {e}")
             return None
 
+    
     def generate_summary_openai(content, summary_type, language, advanced):
         import openai
         openai.api_key = st.secrets["openai_api_key"]
