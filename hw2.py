@@ -82,7 +82,7 @@ def run():
     def generate_summary_cohere(content, summary_type, language, advanced):
         import cohere
         co = cohere.Client(st.secrets["cohere_api_key"])
-        model = "command" if advanced else "embed"
+        model = "command" 
         prompt = f"Please provide a {summary_type.lower()} of the following content in {language}:\n\n{content}"
         try:
             response = co.generate(
