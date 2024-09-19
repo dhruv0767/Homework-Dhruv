@@ -95,7 +95,7 @@ def run():
                         *st.session_state['messages']
                     ]
 
-                    response = openai.ChatCompletion.create(
+                    response = openai.chat_completions.create(
                         model=model,
                         messages=messages,
                         stream=True
@@ -129,7 +129,7 @@ def run():
                         *st.session_state['messages']
                     ]
 
-                    response = openai.ChatCompletion.create(
+                    response = openai.chat_completions.create(
                         model=model,
                         messages=messages,
                         stream=True

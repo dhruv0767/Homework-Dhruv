@@ -9,7 +9,7 @@ st.title('HOMEWORK MANAGER')
 
 # Sidebar selection
 st.sidebar.title("Navigation")
-selection = st.sidebar.radio("Go to", ["Home", "Homework 1", "Homework 2"])
+selection = st.sidebar.radio("Go to", ["Home", "Homework 1", "Homework 2", "Homework 3"])
 
 # Home Page
 if selection == "Home":
