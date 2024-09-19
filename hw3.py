@@ -1,34 +1,14 @@
 import streamlit as st
 import openai
-import PyPDF2
 
 def run():
     st.subheader("Dhruv's Question Answering Chatbot")
 
-    # Function to read PDF file
-    def read_pdf(uploaded_file):
-        pdf_reader = PyPDF2.PdfReader(uploaded_file)
-        text = ""
-        for page in pdf_reader.pages:
-            text += page.extract_text()
-        return text
-
     # Initialize session state
     if 'messages' not in st.session_state:
         st.session_state['messages'] = []
-    if 'document' not in st.session_state:
-        st.session_state['document'] = None
     if 'waiting_for_more_info' not in st.session_state:
         st.session_state['waiting_for_more_info'] = False
-
-    # Sidebar: Input OpenAI API key
-    openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
-    if not openai_api_key:
-        st.info("Please add your OpenAI API key to continue.", icon="🗝️")
-        return
-
-    # Set up OpenAI client
-    openai.api_key = openai_api_key
 
     # Sidebar: Model selection (LLMs)
     st.sidebar.subheader("Select LLM Model")
@@ -42,42 +22,16 @@ def run():
     st.sidebar.subheader("Conversation Memory Settings")
     conversation_memory = st.sidebar.radio("Memory Type", ("Buffer of 5 questions", "Conversation Summary", "Buffer of 5,000 tokens"))
 
-    # File uploader
-    uploaded_file = st.file_uploader(
-        "Upload a document (.pdf or .txt)", type=("pdf", "txt"),
-        help="Supported formats: .pdf, .txt"
-    )
-
-    # Processing the uploaded file
-    if uploaded_file is not None:
-        if st.button("Process"):
-            try:
-                if uploaded_file.type == "text/plain":
-                    document = uploaded_file.getvalue().decode()
-                elif uploaded_file.type == "application/pdf":
-                    document = read_pdf(uploaded_file)
-                else:
-                    st.error("Unsupported file type. Please upload a .pdf or .txt file.")
-                    return
-
-                st.session_state['document'] = document
-                st.success("File processed successfully!")
-            except Exception as e:
-                st.error(f"Error processing file: {str(e)}")
-                return
-
     # Chatbot functionality
     if not st.session_state['waiting_for_more_info']:
-        question = st.chat_input("Ask a question about the document or the URLs:")
+        question = st.chat_input("Ask a question about the URLs:")
 
         if question:
             st.chat_message("user").write(question)
             st.session_state['messages'].append({"role": "user", "content": question})
 
-            # Gather context from document and URLs
+            # Gather context from URLs
             context = ""
-            if st.session_state['document']:
-                context += f"Document: {st.session_state['document']} "
             if url1:
                 context += f"URL1: {url1} "
             if url2:
