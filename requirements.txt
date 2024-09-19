@@ -5,3 +5,4 @@ openai
 anthropic
 cohere
 beautifulsoup4
+PyPDF2

@@ -1,6 +1,7 @@
 import streamlit as st
 import hw1
 import hw2
+import hw3
 
 
 # Title for the main page
@@ -24,3 +25,6 @@ elif selection == "Homework 1":
 # HW 2 Page
 elif selection == "Homework 2":
     hw2.run()
+
+elif selection == "Homework 3":
+    hw3.run()
