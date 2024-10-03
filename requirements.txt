@@ -6,3 +6,4 @@ anthropic
 cohere
 beautifulsoup4
 PyPDF2
+pysqlite3-binary
