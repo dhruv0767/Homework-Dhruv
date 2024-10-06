@@ -4,9 +4,14 @@ beautifulsoup4
 openai
 anthropic
 cohere
-beautifulsoup4
 PyPDF2
 pysqlite3-binary
 chromadb
 pycryptodome
 google-generativeai
+pysqlite3-binary
+protobuf==3.20
+tiktoken
+pymupdf
+Groq
+
